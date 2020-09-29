@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/admin/dashboard', 'Admin\\AdminController@index')->name('admin.dashboard');
+    Route::get('/admin/booklist', 'Admin\\AdminController@showBookList')->name('admin.booklist');
+    Route::post('/admin', 'Admin\\AdminController@storeBook')->name('admin.store');
+    Route::get('/admin/booklist/{id}/edit', 'Admin\\AdminController@editBook')->name('admin.booklist.edit');
+    Route::put('/admin/booklist/{id}', 'Admin\\AdminController@updateBook')->name('admin.booklist.update');
+    Route::delete('/admin/booklist/{id}', 'Admin\\AdminController@deleteBook')->name('admin.booklist.delete');
+});
+
