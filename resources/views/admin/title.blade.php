@@ -17,11 +17,6 @@
                         Show order list
                     </button>
                 </a>
-                <a href="{{ url('/catalog')  }}">
-                    <button class="btn-secondary">
-                        Catalog
-                    </button>
-                </a>
             </div>
         </div>
  </div>

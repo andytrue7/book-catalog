@@ -17,6 +17,12 @@ final class CreateOrderAction
 
     public function execute($request, $id)
     {
+        $book = $this->bookRepository->findById($id);
+
+        if ($book->is_ordered) {
+            return redirect('/catalog');
+        }
+
         $order = new Order();
         $order->name = $request->get('name');
         $order->email = $request->get('email');
@@ -24,8 +30,11 @@ final class CreateOrderAction
 
         $order->save();
 
-        $book = $this->bookRepository->findById($id);
+        $book->is_ordered = 1;
+        $book->save();
 
         $order->books()->attach($book->id);
+
+
     }
 }
