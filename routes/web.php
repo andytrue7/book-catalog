@@ -19,7 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/dashboard', 'Admin\\AdminController@index')->name('admin.dashboard');
@@ -29,4 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/admin/booklist/{id}', 'Admin\\AdminController@updateBook')->name('admin.booklist.update');
     Route::delete('/admin/booklist/{id}', 'Admin\\AdminController@deleteBook')->name('admin.booklist.delete');
 });
+
+Route::get('/catalog', 'CatalogController@index');
+Route::get('/catalog/{id}', 'CatalogController@showBookPage')->name('catalog.show');
 
