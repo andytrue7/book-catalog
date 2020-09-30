@@ -12,7 +12,7 @@
                         <p class="card-text">{{ $book->description  }}</p>
                         <div class="row justify-content-between">
                             <a href="{{ route('catalog.show', $book->id)  }}" class="btn btn-primary">Show more</a>
-                            <a href="#" class="btn btn-primary">Order</a>
+                            <a href="{{ route('order.index', $book->id) }}" class="btn btn-primary">Order</a>
                         </div>
 
                     </div>

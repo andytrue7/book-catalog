@@ -20,7 +20,7 @@
 
                                 </div>
                                 <div class="col-4">
-                                    <a href="#" class="btn btn-primary">Order</a>
+                                    <a href="{{ route('order.index', $book->id) }}" class="btn btn-primary">Order</a>
                                 </div>
                             </div>
                         </div>

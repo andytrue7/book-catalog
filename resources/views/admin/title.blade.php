@@ -12,6 +12,16 @@
                         Show book list
                     </button>
                 </a>
+                <a href="{{ route('admin.orderlist')  }}">
+                    <button class="btn-secondary">
+                        Show order list
+                    </button>
+                </a>
+                <a href="{{ url('/catalog')  }}">
+                    <button class="btn-secondary">
+                        Catalog
+                    </button>
+                </a>
             </div>
         </div>
  </div>

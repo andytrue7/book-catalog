@@ -23,6 +23,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/dashboard', 'Admin\\AdminController@index')->name('admin.dashboard');
     Route::get('/admin/booklist', 'Admin\\AdminController@showBookList')->name('admin.booklist');
+    Route::get('/admin/orderlist', 'Admin\\AdminController@showOrderList')->name('admin.orderlist');
     Route::post('/admin', 'Admin\\AdminController@storeBook')->name('admin.store');
     Route::get('/admin/booklist/{id}/edit', 'Admin\\AdminController@editBook')->name('admin.booklist.edit');
     Route::put('/admin/booklist/{id}', 'Admin\\AdminController@updateBook')->name('admin.booklist.update');
@@ -32,3 +33,5 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/catalog', 'CatalogController@index');
 Route::get('/catalog/{id}', 'CatalogController@showBookPage')->name('catalog.show');
 
+Route::get('/order/{id}', 'OrderController@index')->name('order.index');
+Route::post('/order/{id}', 'OrderController@createOrder')->name('order.create');
