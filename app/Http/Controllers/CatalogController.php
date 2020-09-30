@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Repository\BookRepository;
-use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
     private $bookRepository;
 
-    public function __construct(BookRepository  $bookRepository)
-    {
+    public function __construct(
+        BookRepository  $bookRepository
+    ) {
         $this->bookRepository = $bookRepository;
     }
 

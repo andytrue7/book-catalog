@@ -35,3 +35,8 @@ Route::get('/catalog/{id}', 'CatalogController@showBookPage')->name('catalog.sho
 
 Route::get('/order/{id}', 'OrderController@index')->name('order.index');
 Route::post('/order/{id}', 'OrderController@createOrder')->name('order.create');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/comment/{id}', 'CommentController@createComment')->name('comment.create');
+    Route::delete('/comment/{id}', 'CommentController@deleteComment')->name('comment.delete');
+});
