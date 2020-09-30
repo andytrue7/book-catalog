@@ -10,6 +10,7 @@ use App\Entity\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use App\Repository\BookRepository;
+use App\Repository\OrderRepository;
 
 class AdminController extends Controller
 {
@@ -17,17 +18,20 @@ class AdminController extends Controller
     private $updateBookAction;
     private $bookRepository;
     private $deleteBookAction;
+    private $orderRepository;
 
     public function __construct(
         CreateBookAction $createBookAction,
         BookRepository $repository,
         UpdateBookAction $updateBookAction,
-        DeleteBookAction $deleteBookAction
+        DeleteBookAction $deleteBookAction,
+        OrderRepository $orderRepository
     ) {
         $this->createBookAction = $createBookAction;
         $this->bookRepository = $repository;
         $this->updateBookAction = $updateBookAction;
         $this->deleteBookAction = $deleteBookAction;
+        $this->orderRepository = $orderRepository;
     }
 
     public function index()
@@ -64,7 +68,7 @@ class AdminController extends Controller
     public function showOrderList()
     {
         if (request()->user()->can('view', Book::class)) {
-            $orders = Order::latest()->get();
+            $orders = $this->orderRepository->getLatest();
 
             return view('admin.showOrderList', compact('orders'));
         }

@@ -11,4 +11,9 @@ class Book extends Model
     {
         return $this->belongsToMany('App\Entity\Order', 'book_order', 'book_id', 'order_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Entity\Comment');
+    }
 }

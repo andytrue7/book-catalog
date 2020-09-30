@@ -28,5 +28,46 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center mt-3">
+            <h3>Comments</h3>
+        </div>
+            @foreach($book->comments as $comment)
+                <div class="row justify-content-center mt-3">
+                    <div class="card" style="min-width: 40%">
+                        <div class="card-header">
+                            {{ $comment->user->name }} commented at {{ $comment->created_at }}
+                        </div>
+                        <div class="card-body row">
+                            <p class="card-text col-9">{{ $comment->body }}</p>
+                            <div class="col-3">
+                                @can('view', $comment)
+                                    <form action="{{ route('comment.delete', $comment->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                @endcan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+             <div class="row justify-content-center mt-3">
+                @if(auth()->user())
+                    <form class="d-flex" action="{{ route('comment.create', $book->id) }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="comment" placeholder="Leave your comment">
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary ml-3">Send</button>
+                        </div>
+
+                    </form>
+                @else
+                    <p>You have to sign in to comment</p>
+                @endif
+            </div>
+
     </div>
 @endsection
