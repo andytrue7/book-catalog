@@ -6,6 +6,7 @@ use App\Action\CreateBookAction;
 use App\Action\DeleteBookAction;
 use App\Action\UpdateBookAction;
 use App\Entity\Book;
+use App\Entity\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use App\Repository\BookRepository;
@@ -35,7 +36,7 @@ class AdminController extends Controller
             return view('admin.index');
         }
 
-        return redirect('/home');
+        return redirect('/catalog');
     }
 
     public function storeBook(BookRequest $request)
@@ -46,7 +47,7 @@ class AdminController extends Controller
             return redirect('/admin/dashboard');
         }
 
-        return redirect('/home');
+        return redirect('/catalog');
     }
 
     public function showBookList()
@@ -57,7 +58,18 @@ class AdminController extends Controller
             return view('admin.showBookList', compact('books'));
         }
 
-        return redirect('/home');
+        return redirect('/catalog');
+    }
+
+    public function showOrderList()
+    {
+        if (request()->user()->can('view', Book::class)) {
+            $orders = Order::latest()->get();
+
+            return view('admin.showOrderList', compact('orders'));
+        }
+
+        return redirect('/catalog');
     }
 
     public function editBook($id)
@@ -68,7 +80,7 @@ class AdminController extends Controller
             return view('admin.edit', compact('book'));
         }
 
-        return redirect('/home');
+        return redirect('/catalog');
     }
 
     public function updateBook(BookRequest $request, $id)
@@ -79,7 +91,7 @@ class AdminController extends Controller
             return redirect()->back();
         }
 
-        return redirect('/home');
+        return redirect('/catalog');
     }
 
     public function deleteBook($id)
@@ -90,7 +102,7 @@ class AdminController extends Controller
             return redirect()->back();
         }
 
-        return redirect('/home');
+        return redirect('/catalog');
     }
 
 

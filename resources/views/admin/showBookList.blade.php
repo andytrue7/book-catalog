@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-@yield('title')
-
 @section('content')
     <div class="container">
         @include('admin.title')
+        <hr>
+        <div class="row">
+            <h3>Books</h3>
+        </div>
         <div class="row mt-3">
             <table class="table table-bordered">
                 <thead>
