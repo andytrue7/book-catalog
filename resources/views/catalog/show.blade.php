@@ -16,11 +16,15 @@
                             <h5 class="card-title">{{ $book->title }}</h5>
                             <p class="card-text">{{ $book->description }}</p>
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-7">
 
                                 </div>
-                                <div class="col-4">
-                                    <a href="{{ route('order.index', $book->id) }}" class="btn btn-primary">Order</a>
+                                <div class="col-5">
+                                    @if($book->is_ordered)
+                                        <p>Not available</p>
+                                    @else
+                                        <a href="{{ route('order.index', $book->id) }}" class="btn btn-primary">Order</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
